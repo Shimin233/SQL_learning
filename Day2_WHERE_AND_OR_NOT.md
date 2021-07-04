@@ -43,3 +43,38 @@ WHERE order_date >= '2021-01-01'
 ```
 
 ## AND, OR, NOT operators
+
+
+```mysql
+-- AND
+SELECT *
+FROM orders
+WHERE order_date >= '2021-01-01' AND points > 1000
+
+-- OR
+SELECT *
+FROM orders
+WHERE order_date >= '2021-01-01' OR points > 1000
+
+SELECT *
+FROM orders
+WHERE order_date >= '2021-01-01' OR points > 1000 AND
+     state='VA' 
+-- order of operators matters; here it is ...OR(...AND...) since AND has priority over OR
+
+-- NOT
+SELECT *
+FROM orders
+WHERE NOT (order_date > '2021-01-01' OR points > 1000)
+-- equivalently, order_date <= '2021-01-01' AND points <= 1000
+```
+### Ex
+```mysql
+-- From the order_items table, get the items
+--  for order #6
+--  where the total price (i.e. unit_price * quantity) is greater than 30
+
+SELECT *
+FROM order_items
+WHERE order_id=6 AND unit_price * quantity> 30
+```
