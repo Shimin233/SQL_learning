@@ -18,10 +18,22 @@ FROM Customers
 WHERE state IN ('VA', 'FL', 'GA')
 
 -- the following is equivalent to 
--- WHERE state 
+-- WHERE NOT(state='VA' OR state='FL' OR state='GA')
 SELECT * 
 FROM Customers
 WHERE state NOT IN ('VA', 'FL', 'GA')
+```
+
+### Ex
+```mysql
+-- Return products with quantity in stock equal to 49, 38, 72
+
+-- my solution (correct)
+SELECT *
+FROM products
+WHERE quantity_in_stock IN (49, 38, 72)
+-- the result will be only two rows appearing: 
+-- Pork with 49 and Lettuce with 38, no row of 72
 ```
 
 ## BETWEEN 
