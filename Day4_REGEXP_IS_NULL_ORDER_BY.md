@@ -104,4 +104,84 @@ WHERE last_name REGEXP 'br|bu'
 
 ## IS NULL
 
+```mysql
+-- look for those cells with NULL value
+-- e.g. the customers without a phone
+SELECT *
+FROM customers
+WHERE phone IS NULL
+
+-- the customers with a phone
+SELECT *
+FROM customers
+WHERE phone IS NOT NULL
+
+```
+### Ex
+
+```mysql
+-- Get the orders that are not shipped
+SELECT *
+FROM orders
+WHERE shipper_id IS NULL
+-- equivalenly, shipped_date IS NULL
+```
 ## OREDER BY
+
+```mysql
+-- default order is sorted by the primary key column
+-- e.g. customers ' primary key column is customer_id
+
+
+
+SELECT *
+FROM customers
+ORDER BY first_name -- in ascending order
+
+SELECT *
+FROM customers
+ORDER BY first_name DESC -- in descending order
+
+
+SELECT *
+FROM customers
+ORDER BY state, first_name -- by multiple columns, in state then in first name
+
+SELECT *
+FROM customers
+ORDER BY state DESC, first_name 
+
+SELECT *
+FROM customers
+ORDER BY state DESC, first_name DESC
+
+SELECT first_name, last_name
+FROM customers
+ORDER BY birth_date -- can sort columns by any col, no matter chosen to show up or not
+
+SELECT first_name, last_name, 10 AS points
+FROM customers
+ORDER BY points, first_name -- can sort by new col
+
+SELECT first_name, last_name, 10 AS points
+FROM customers
+ORDER BY 1, 2 --this means sorting by first_name, then by last_name
+
+SELECT birth_date, first_name, last_name, 10 AS points
+FROM customers
+ORDER BY 1, 2 --this means sorting by birth_date, then by first_name
+
+-- can also sort by some calculation result of existing col's
+```
+
+### Ex
+```mysql
+-- Figure out the codes such that
+-- picking all the orders from order_items with id 2,
+-- and sort them in descending total price=quantity*unit_price
+
+SELECT *, quantity*unit_price AS total_price
+FROM order_items
+WHERE order_id = 2
+ORDER BY quantity*unit_price DESC -- Or: ORDER BY total_price DESC
+```
