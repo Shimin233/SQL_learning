@@ -63,7 +63,7 @@ WHERER last_name REGEXP '[a-h]e' -- containing ae OR be OR ce OR... OR he
 --  first names are ELKA or AMBUR
 SELECT *
 FROM customers
-WHERE first_name == 'ELKA' OR 'AMBUR'
+WHERE first_name = 'ELKA' OR 'AMBUR'
 -- Or
 SELECT *
 FROM customers
