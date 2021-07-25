@@ -33,6 +33,8 @@ LIMIT 3
 ```mysql
 -- select col's from multiple tables
 -- two types of combining tables: OUTER JOIN (later) and INNER JOIN
+
+-- First we look at INNER JOIN, inside one database (sql_store here): 
 SELECT *
 FROM orders 
 INNER JOIN customers -- equivalently can type: JOIN customers
@@ -66,6 +68,15 @@ SELECT order_id, o.customer_id, first_name, last_name
 FROM orders o
 JOIN customers c
     ON o.customer_id = c.customer_id 
+    
+-- Note that I can order using the ambiguous col name after joining, 
+--   as long as the SELECT clause has specified the table it belongs to beforehand
+SELECT order_id, o.customer_id, first_name, last_name 
+FROM orders o
+JOIN customers c
+    ON o.customer_id = c.customer_id 
+ORDER BY customer_id
+
 ```
 ### Ex
 ```mysql
@@ -83,6 +94,7 @@ JOIN products p ON oi.product_id = p.product_id
 ```
 ## Joining Across Databases
 ```mysql
+USE sql_store;   -- or without this line, if previously we kept using sql_store 
 SELECT *
 FROM order_items oi
 JOIN sql_inventory.products p --can pick such a sql-stored database
@@ -90,11 +102,11 @@ JOIN sql_inventory.products p --can pick such a sql-stored database
  
  
 -- under another certain database, 
---  the forms which need databases specified has swapped
-USE sql_inventory
+--  the forms which need databases specified, has been swapped
+USE sql_inventory; 
 SELECT *
-FROM sql_store.order_items oi
-JOIN products p --can pick such a sql-stored database
+FROM sql_store.order_items oi --can pick such a sql-stored database
+JOIN products p 
     ON oi.product_id=p.product_id
     
 ```
