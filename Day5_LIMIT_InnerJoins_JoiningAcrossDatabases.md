@@ -111,4 +111,19 @@ JOIN products p
     
 ```
 
+### Summary of statments so far
+```mysql
+USE sql_store; 
+
+SELECT (DINSTINCT) customers.customer_id, last_name, address, shipped_date
+ -- as long as rows differ by at least one col, rows will appear through they have same last_name's
+FROM customers
+JOIN orders o 
+	ON o.customer_id=customers.customer_id
+WHERE NOT(shipped_date <= '2018-01-01') AND
+         last_name REGEXP '^t|o[nm]'  OR
+         last_name LIKE '_____field'
+ORDER BY customer_id (DESC)
+
+```
 
