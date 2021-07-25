@@ -22,7 +22,7 @@ WHERER last_name REGEXP 'field$' -- ending with field
 
 SELECT *
 FROM customers
-WHERER last_name REGEXP 'field'
+WHERER last_name REGEXP 'field' -- containing 'field'
 
 
 SELECT *
@@ -31,9 +31,10 @@ WHERER last_name REGEXP 'field|rose|mac' -- containing field OR rose OR mac
 
 SELECT *
 FROM customers
-WHERER last_name REGEXP '^field|rose|mac' -- beginning with field OR rose OR mac
--- | can connect under ^ of the form ^(..|..); beyond $, of the form (...$)|(...$)
--- only two customers, and none of them having start as field
+WHERER last_name REGEXP '^(field|rose|mac)' -- beginning with field OR rose OR mac
+-- Automatically, '^...|...|' means '(^...)|...|...';
+--  can use parentheses of the form ^(..|..); of the form (...$)|(^...)
+--  only two customers, and none of them having start as field
 
 
 SELECT *
@@ -51,9 +52,9 @@ WHERER last_name REGEXP '[a-h]e' -- containing ae OR be OR ce OR... OR he
 --Recap: 
 -- ^, begining
 -- $, end
--- |, logical OR
 -- [abcd], a sequence of OR
 -- [a-f], a range of R
+-- |, logical OR
 
 ```
 
@@ -63,11 +64,14 @@ WHERER last_name REGEXP '[a-h]e' -- containing ae OR be OR ce OR... OR he
 --  first names are ELKA or AMBUR
 SELECT *
 FROM customers
-WHERE first_name = 'ELKA' OR 'AMBUR'
+WHERE first_name = 'ELKA' OR  first_name = 'AMBUR' 
+--   note that typing first_name = 'ELKA' OR 'AMBUR' gives only those containing ELKA, do not know why
 -- Or
 SELECT *
 FROM customers
-WHERE first_name REGEXP 'elka|ambur'
+WHERE first_name REGEXP 'elka|ambur' 
+-- since first_name usually either is 'elka' or 'ambur', or doesn't contain 'elka' or 'ambur' at all,
+--   we can use REGEXP here
 
 --  last names end with EY or ON
 SELECT *
@@ -81,11 +85,11 @@ WHERE last_name REGEXP 'EY$|ON$'
 --  last names start with MY or contains SE
 SELECT *
 FROM customers
-WHERE last_name LIKE 'MY%' OR 'SE%'
+WHERE last_name LIKE 'MY%' OR '%SE%'
 -- Or
 SELECT *
 FROM customers
-WHERE last_name REGXEP '^MY|SE'
+WHERE last_name REGEXP '^MY|SE'
 
 --  last names contain B followed by R or U
 SELECT *
@@ -131,6 +135,8 @@ WHERE shipper_id IS NULL
 ```mysql
 -- default order is sorted by the primary key column
 -- e.g. customers ' primary key column is customer_id
+-- check this by clicking the first icon on the right of customer, in Scheme section,
+--   then see primary key column in 'Indexes'
 
 
 
