@@ -11,7 +11,7 @@ SELECT *
 FROM Customers
 WHERE state='VA' OR state='FL' OR state='GA'
 
-__ IN means being an element in
+__ IN means being an element in some set/vecotr
 __ the following is equivalent to the codes above using OR
 SELECT * 
 FROM Customers
@@ -36,7 +36,7 @@ WHERE quantity_in_stock IN (49, 38, 72)
 -- Pork with 49 and Lettuce with 38, no row of 72
 ```
 
-## BETWEEN 
+## BETWEEN...AND...
 
 ```mysql
 SELECT *
@@ -60,7 +60,7 @@ SELECT *
 FROM customers
 WHERE birth_date BETWEEN '1990-01-01' AND '2000-01-01'
 -- three people outputted
--- note the format to type dates: order, two-digit and four-digit,  enclosed by ''
+-- note the format to type dates: YYYY-MM-DD,  enclosed by ''
 ```
 ## LIKE
 ```mysql
@@ -69,12 +69,12 @@ WHERE birth_date BETWEEN '1990-01-01' AND '2000-01-01'
 --(can type b,or B into codes, no matter upper or lowercase)
 SELECT *
 FROM customers
-WHERE las_name LIKE 'b%'
+WHERE last_name LIKE 'b%'
 
 --...last name starts with 'brush'...
 SELECT *
 FROM customers
-WHERE las_name LIKE 'brush%'
+WHERE last_name LIKE 'brush%'
 
 -- pick customers whose last name contains b anywhere, 
 --  using % to represent other parts in the item (last name here)
@@ -104,5 +104,5 @@ SELECT *
 FROM customers
 WHERE (address LIKE '%TRAIL%' OR address LIKE '%AVENUE%') AND phone LIKE '%9'
 -- note the form: LIKE 'anythingFollowingLIKE'
--- OR only connects complete statement which are TRUE or FALSE
+-- OR is used to connect complete statement which are TRUE or FALSE
 ```
