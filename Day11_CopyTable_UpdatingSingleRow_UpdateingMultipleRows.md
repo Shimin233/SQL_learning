@@ -46,6 +46,53 @@ WHERE i.payment_date IS NOT NULL -- Or: i.payment_date > '0000-00-00'
 ```
 ## Updating a Single Row
 
+```mysql
+UPDATE invoices
+SET payment_total = 10, payment_date='2019-03-01'
+WHERE invoice_id=1
+
+-- can turn this back: 
+UPDATE invoices
+SET payment_total = 0, payment_date=NULL -- Or equivalently: payment_total=DEFAULT 
+WHERE invoice_id=1
+
+-- more updating methods: 
+UPDATE invoices
+SET 
+  payment_total = invoice_total * 0.5, 
+  payment_date= due_date
+WHERE invoice_id=3
+
+```
 ## Updateing Multiple Rows
+```mysql
+-- you may want to update all the rows with client_id=3: 
+UPDATE invoices
+SET 
+  payment_total = invoice_total * 0.5, 
+  payment_date= due_date
+WHERE client_id=3
+-- but this will cause only one row updated; 
+--   this is an error unique to MySQL Workbench.
+--   To solve it, do the following:
+--    Click from the menu, MYSQL Workbench, Preferences, SQL Editor,
+--    Save update, close this window and re-connect
+--    Now the codes above can update all the rows with client_id=3
+-- Now, more methods to update multiple rows: 
+UPDATE invoices
+SET 
+  payment_total = invoice_total * 0.5, 
+  payment_date= due_date
+WHERE invoice_id IN (3, 4)
+```
+### Ex
+```mysql
+-- Write a SQL statement to 
+--  give any customers born before 1990 50 extra points
 
+USE sql_store; 
+UPDATE customers
+SET points = points + 50
+WHERE birth_date < '1990-01-01'
 
+```
