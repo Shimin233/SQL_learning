@@ -67,5 +67,29 @@ WHERE customer_id IN
 
 ```
 ## Deleting Rows
+```mysql
+-- ths below will delete everything, watch out!
+DELETE FROM invoices
 
+DELETE FROM invoices
+WHERE invoice_id=1
+
+-- can use subquery: 
+SELECT *
+FROM clients
+WHERE name = 'Myworks'
+--   combine it into DELETE FROM clause
+DELETE FROM invoices
+WHERE client_id = (
+  SELECT *
+  FROM clients
+  WHERE name = 'Myworks'
+  )
+
+
+```
 ## Restoring Course Databases
+```mysql
+-- File menu, open sql script, click create-databases.sql, to re-build all databases in Schemas   
+      
+```
