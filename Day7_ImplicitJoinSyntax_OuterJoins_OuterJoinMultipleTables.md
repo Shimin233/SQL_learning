@@ -67,8 +67,10 @@ FROM customers c
 RIGHT JOIN orders o
   ON o.customer_id = c.customer_id
 ORDER BY c.customer_id; 
-```
 
+-- Remark: sometimes while LEFT JOIN and RIGHT JOIN are still defined as above, OUTER JOIN is a distinct concept, meaning that 
+the two tables are combined with BOTH of their rows remained, probably with some additional NULL entries added automatically
+```
 ### Ex
 
 ```mysql
