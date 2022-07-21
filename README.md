@@ -5,7 +5,7 @@ Now I am just following this 3-hour YouTube video tutorial [MySQL Tutorial for B
 
 ## SQL conventions
 - semi-colon `;` at the end
-- # to comment, or in some environments use `--`
+- to comment, or in some environments use `--`
 - Capitalisation does not matter, though conventionally we capitalise all codes
 - To view data table:
     - SELECT * FROM table_name
