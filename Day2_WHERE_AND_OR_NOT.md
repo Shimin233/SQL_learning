@@ -31,6 +31,12 @@ FROM Customers
 WHERE birth_date > '1990-01-01' -- can also use comparison operators for strings
  
 ```
+The summary of arithmetic signs are as below:
+
+![image](https://user-images.githubusercontent.com/68281774/180296322-0768c088-5f97-4ec6-8af9-44f90c53749f.png)
+
+Note that `IS NULL` is used to check null value, which differs from the "null string".
+
 
 ### Ex 
 ```mysql
